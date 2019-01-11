@@ -19,15 +19,20 @@ namespace SchoolManager
         private PointF mouseclick;
         private bool drag;
         private int offsetDragX, offsetDragY;
+        private float dx;
 
         public Expanded()
         {
             InitializeComponent();
             MissingLabel.Visible = false;
             Timer1.Enabled = true;
-            Timer1.Interval = 30;
+            Timer1.Interval = 100;
             Timer1.Tick += Timer1tick;
             Timer1.Start();
+            using (Graphics g = CreateGraphics())
+            {
+                dx = 96 / g.DpiX;
+            }
         }
 
         private void Timer1tick(object sender, EventArgs e)
@@ -82,8 +87,7 @@ namespace SchoolManager
             IntPtr hBitmap;
             IntPtr oldBitmap;
 
-            try
-            {
+
                 //Display-image
                 Bitmap bmp = new Bitmap(backgroundImage);
                 Graphics g = Graphics.FromImage(bmp);
@@ -107,24 +111,22 @@ namespace SchoolManager
                     }
                     for (int j = 0; j < 7; j++)
                     {
-                        Brush pencolour = Brushes.Aqua;
+                        Brush pencolourl = Brushes.Aqua;
                         PointF curloc = new PointF(110 * i + 10, 82 * j + 10);
                         RectangleF containerF = new RectangleF(curloc.X,curloc.Y,100,80);
                         int alpha = 255;
-                        if (Program.TimetableList.ContainsKey((i + 1) + j.ToString()))
-                        {
-                            period curp = Program.TimetableList[(i + 1) + j.ToString()];
-                            pencolour = new SolidBrush(Color.FromArgb(alpha,Program.ColorRef[curp.ClassCode]));
-                            Brush textbrush = new SolidBrush(Color.FromArgb(alpha, Color.Black));
-                            g.FillRectangle(pencolour, containerF);
-                            g.DrawString(curp.Room,SystemFonts.DefaultFont,textbrush,curloc.X+60,curloc.Y+65);
-                            g.DrawString(curp.ClassCode, SystemFonts.DefaultFont, textbrush, curloc.X, curloc.Y+65);
-                            g.DrawString(curp.SchoolStaffCode, SystemFonts.DefaultFont, textbrush, curloc.X, curloc.Y+55);
-                            g.DrawString(curp.ClassDescription, SystemFonts.DefaultFont, textbrush, new RectangleF(curloc.X, curloc.Y+1, 98, 50));
-                            textbrush.Dispose();
-                        }
-                        else
-                        g.FillRectangle(pencolour, containerF);
+                    if (Program.TimetableList.ContainsKey((i + 1) + j.ToString()))
+                    {
+                        Period curp = Program.TimetableList[(i + 1) + j.ToString()];
+                        pencolourl = new SolidBrush(Color.FromArgb(alpha, Program.ColorRef[curp.ClassCode]));
+                        Brush textbrush = new SolidBrush(Color.FromArgb(alpha, Color.Black));
+                        g.FillRectangle(pencolourl, containerF);
+                        g.DrawString(curp.Room, SystemFonts.DefaultFont, textbrush, curloc.X + 60, curloc.Y + 65);
+                        g.DrawString(curp.ClassCode, SystemFonts.DefaultFont, textbrush, curloc.X, curloc.Y + 65);
+                        g.DrawString(curp.SchoolStaffCode, SystemFonts.DefaultFont, textbrush, curloc.X, curloc.Y + 55);
+                        g.DrawString(curp.ClassDescription, SystemFonts.DefaultFont, textbrush, new RectangleF(curloc.X, curloc.Y + 1, 98, 50));
+                        textbrush.Dispose();
+                    }
                         if (mouseclick.X!=-10000 && containerF.Contains(mouseclick)&& Program.TimetableList.ContainsKey((i + 1) + j.ToString()))
                         {
                             mouseclick = new PointF(-10000, 0);
@@ -134,13 +136,13 @@ namespace SchoolManager
                             if (results == DialogResult.OK)
                             {
                                 Program.ColorRef[Program.TimetableList[(i + 1) + j.ToString()].ClassCode] = colorDialog1.Color;
-                            }
+                            }               
                             colorbox = false;
                         }
-                        pencolour.Dispose();
-                    }
+                    pencolourl.Dispose();
                 }
-                    using (Font bigfont = new Font("Trebuchet MS", g.DpiX * 12 / 72))
+                }
+                    using (Font bigfont = new Font("Trebuchet MS", dx * 18 ))
                     {
                         g.DrawString("Term " + Program.SettingsData.Curterm, bigfont, Brushes.White, 1098, 5);
                     }
@@ -173,11 +175,7 @@ namespace SchoolManager
                     API.DeleteObject(hBitmap);
                 }
                 API.DeleteDC(memDc);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+
         }
         #endregion
 

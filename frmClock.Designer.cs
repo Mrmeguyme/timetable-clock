@@ -160,6 +160,8 @@ namespace SplashScreen
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSplash";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "SchoolManager";
             this.Activated += new System.EventHandler(this.frmSplash_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSplash_FormClosing);

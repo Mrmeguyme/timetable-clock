@@ -37,8 +37,11 @@ namespace SchoolManager
             this.Passbox = new System.Windows.Forms.TextBox();
             this.Loginbutton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +56,7 @@ namespace SchoolManager
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -68,12 +72,13 @@ namespace SchoolManager
             // 
             // Errormsg
             // 
+            this.Errormsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Errormsg.AutoSize = true;
-            this.Errormsg.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Errormsg.Location = new System.Drawing.Point(0, 371);
+            this.Errormsg.Location = new System.Drawing.Point(2, 371);
             this.Errormsg.Name = "Errormsg";
-            this.Errormsg.Size = new System.Drawing.Size(0, 13);
+            this.Errormsg.Size = new System.Drawing.Size(124, 13);
             this.Errormsg.TabIndex = 2;
+            this.Errormsg.Text = "Login to Fetch Timetable";
             // 
             // Passbox
             // 
@@ -98,6 +103,8 @@ namespace SchoolManager
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Controls.Add(this.progresslabel);
             this.panel1.Controls.Add(this.progressBar1);
@@ -111,6 +118,28 @@ namespace SchoolManager
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(641, 384);
             this.panel1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(554, 151);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Not trusted";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(472, 151);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Trust";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -128,6 +157,8 @@ namespace SchoolManager
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.01923F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.98077F));
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(button3, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDown1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
@@ -146,11 +177,30 @@ namespace SchoolManager
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(213, 310);
             this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 174);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Check for Update";
+            // 
+            // button3
+            // 
+            button3.Location = new System.Drawing.Point(135, 170);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(75, 22);
+            button3.TabIndex = 16;
+            button3.Text = "Check";
+            button3.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -278,22 +328,24 @@ namespace SchoolManager
             // 
             this.progresslabel.AutoSize = true;
             this.progresslabel.Location = new System.Drawing.Point(469, 95);
+            this.progresslabel.MaximumSize = new System.Drawing.Size(170, 150);
             this.progresslabel.Name = "progresslabel";
-            this.progresslabel.Size = new System.Drawing.Size(57, 13);
+            this.progresslabel.Size = new System.Drawing.Size(114, 13);
             this.progresslabel.TabIndex = 7;
-            this.progresslabel.Text = "Up to date";
+            this.progresslabel.Text = "Checking for Update...";
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(472, 111);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(141, 23);
+            this.progressBar1.Size = new System.Drawing.Size(157, 23);
             this.progressBar1.TabIndex = 6;
             this.progressBar1.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(469, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 78);
@@ -312,6 +364,7 @@ namespace SchoolManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(641, 384);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
@@ -356,5 +409,9 @@ namespace SchoolManager
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox EarlyBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
     }
 }

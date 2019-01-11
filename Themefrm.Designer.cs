@@ -45,6 +45,7 @@
             this.Folderbutton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.Refreshbutton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Previewbox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +69,7 @@
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // Title
             // 
@@ -147,7 +149,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 8;
-            this.button4.Text = "Delete";
+            this.button4.Text = "Unload";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -161,11 +163,22 @@
             this.Refreshbutton.UseVisualStyleBackColor = true;
             this.Refreshbutton.Click += new System.EventHandler(this.Refreshbutton_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(176, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Workshop";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Themefrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 427);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.Refreshbutton);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.Folderbutton);
@@ -203,5 +216,6 @@
         private System.Windows.Forms.ColumnHeader Ver;
         private System.Windows.Forms.ColumnHeader Author;
         private System.Windows.Forms.Button Refreshbutton;
+        private System.Windows.Forms.Button button2;
     }
 }

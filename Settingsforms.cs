@@ -30,18 +30,29 @@ namespace SchoolManager
             {
                 if (100 > value && value > 0)
                 {
-                    progresslabel.Text = bytesreceived.ToString("0.###") + "/" + Bytesneeded.ToString("0.###") + " MB";
-                    progressBar1.Visible = true;
+                    SafeUpdatemsg(bytesreceived.ToString("0.###") + "/" + Bytesneeded.ToString("0.###") + " MB");
+                    if (progressBar1.InvokeRequired)
+                    {
+                        Errormsg.Invoke(new Action(() => progressBar1.Value = value));
+                        Errormsg.Invoke(new Action(() => progressBar1.Visible = true));
+                    }
+                    else
+                    {
+                        progressBar1.Value = value;
+                        progressBar1.Visible = true;
+                    }
                 }
                 else if (progressBar1.Visible)
                 {
-                    progressBar1.Visible = false;
+                    if (progressBar1.InvokeRequired)
+                        Errormsg.Invoke(new Action(() => progressBar1.Visible = false));
+                    else
+                        progressBar1.Visible = false;
                     if (value==100)
-                        progresslabel.Text = "Downloaded";
+                        SafeUpdatemsg("Downloaded");
                 }
 
                 _Download = value;
-                progressBar1.Value = value;
             }
         }
 
@@ -69,14 +80,14 @@ namespace SchoolManager
             Errormsg.Text = "Attempting fetch...";
             string usertxt = Userbox.Text;
             string passtxt = Passbox.Text;
+            Userbox.Clear();
+            Passbox.Clear();
             Task.Run(() =>
             {
                 SetLabel1TextSafe(Timetable.UpdateTimetable(usertxt, passtxt).Item1);
                 usertxt = "";
                 passtxt = "";
             });
-            Userbox.Clear();
-            Passbox.Clear();
         }
 
         private void SetLabel1TextSafe(string txt)
@@ -87,6 +98,23 @@ namespace SchoolManager
                 return;
             }
             Errormsg.Text = txt;
+        }
+
+        public void SafeUpdatemsg(string txt)
+        {
+            if (progresslabel.InvokeRequired)
+            {
+                progresslabel.Invoke(new Action(() => progresslabel.Text = txt));
+                progresslabel.Invoke(new Action(() => progresslabel.Update()));
+                return;
+            }
+            progresslabel.Text = txt;
+            if (txt.StartsWith("Untrusted")&&Timetable.CertHash!="")
+            {
+                button1.Visible = true;
+                button2.Visible = true;
+            }
+            progresslabel.Update();
         }
 
         private void Settingsforms_Shown(object sender, EventArgs e)
@@ -158,6 +186,29 @@ namespace SchoolManager
                 EarlyBox.Checked = false;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Program.SettingsData.Thumbprintlist.Add(Timetable.CertHash);
+            progresslabel.Text = "Trusted " + Timetable.CertHash;
+            Timetable.CertHash = "";
+            button1.Visible = false;
+            button2.Visible = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Timetable.CertHash = "";
+            progresslabel.Text = "Untrusted Update Server";
+            button1.Visible = false;
+            button2.Visible = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
 
         //Program.BackImage = ResizeImage(Image.FromFile(Program.SETTINGS_DIRECTORY + "/Backimage.png"), 1180,590);
     }
