@@ -62,19 +62,19 @@ namespace SplashScreen
             new List<string>
             {
                 "31500", 
-                "30300", 
+                "29700", 
                 "31500", 
                 "Form                                                                     0" 
             },
-            new List<string> {"31800", "30600", "31800", "Go to Period 1"},
-            new List<string> {"34800", "33600", "34500", "Period 1"},
-            new List<string> { "35100", "33900", "34800", "Go to Period 2" },
-            new List<string> { "38100", "36900", "37500", "Period 2" },
-            new List<string> { "39000", "37800", "38400", "Recess" },
-            new List<string> { "39300", "38100", "38700", "Go to Period 3" },
-            new List<string> { "42300", "41100", "41400", "Period 3" },
-            new List<string> { "42600", "41400", "41700", "Go to Period 4" },
-            new List<string> { "45600", "44100", "44400", "Period 4" },
+            new List<string> {"31800", "30000", "31800", "Go to Period 1"},
+            new List<string> {"34800", "33000", "34500", "Period 1"},
+            new List<string> { "35100", "33300", "34800", "Go to Period 2" },
+            new List<string> { "38100", "36300", "37500", "Period 2" },
+            new List<string> { "39000", "37200", "38400", "Recess" },
+            new List<string> { "39300", "37500", "38700", "Go to Period 3" },
+            new List<string> { "42300", "40500", "41400", "Period 3" },
+            new List<string> { "42600", "40800", "41700", "Go to Period 4" },
+            new List<string> { "45600", "43800", "44400", "Period 4" },
             new List<string> { "48300", "48300", "46500", "Lunch" },
             new List<string> { "48600", "48600", "46800", "Go to Period 5" }, 
             new List<string> { "51600", "51600", "49500", "Period 5" },
@@ -841,7 +841,7 @@ namespace SplashScreen
                     try
                     {
                         //Throws error when Authentication failed
-                        sslStream.AuthenticateAsClient("Timetable.duckdns.org");
+                        sslStream.AuthenticateAsClient(connectip);
                     }
                     catch(Exception e)
                     {

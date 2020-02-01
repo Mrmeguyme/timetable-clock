@@ -38,6 +38,12 @@ namespace SchoolManager
                 {
                     return true;
                 }
+                else if (int.Parse(v2[i]) == v1Int)
+                {
+                    //continue
+                }
+                else
+                    return false;
             }
 
             for (i = v1.Length; i < v2.Length; i++)
@@ -185,28 +191,17 @@ namespace SchoolManager
                 if (Program.Calltype == "student")
                     sqlquery =
                         "%20AND%20TD.PeriodNumber%20>=%200%20AND%20TD.PeriodNumberSeq%20=%201AND%20(stopdate%20IS%20NULL%20OR%20stopdate%20>%20getdate())--";
-                if (Program.SettingsData.Curterm == 0)
+                for (int i = 4; i > 0; i--)
                 {
-                    for (int i = 4; i > 0; i--)
+                    html = web.DownloadString(
+                        "https://intranet.trinity.vic.edu.au/timetable/getTimetable1.asp?synID=" + Program.SettingsData.SynID +
+                        "&year=" + DateTime.Now.Year + "&term=" + i + sqlquery + "&callType=" + Program.Calltype);
+                    html = html.Substring(html.Contains("[")? html.IndexOf("[") : 0);
+                    if (html.Length > 10)
                     {
-                        html = web.DownloadString(
-                            "https://intranet.trinity.vic.edu.au/timetable/getTimetable1.asp?synID=" + Program.SettingsData.SynID +
-                            "&year=" + DateTime.Now.Year + "&term=" + i + sqlquery + "&callType=" + Program.Calltype);
-                        if (html.Length > 10)
-                        {
-                            Program.SettingsData.Curterm = i;
-                            html = html.Substring(html.IndexOf("["));
-                            break;
-                        }
+                        Program.SettingsData.Curterm = i;
+                        break;
                     }
-                }
-                else
-                {
-                    html = web.DownloadString("https://intranet.trinity.vic.edu.au/timetable/getTimetable1.asp?synID=" +
-                                              Program.SettingsData.SynID + "&year=" + DateTime.Now.Year + "&term=" +
-                                              Program.SettingsData.Curterm + sqlquery + "&callType=" +
-                                              Program.Calltype);
-                    html = html.Substring(html.IndexOf("["));
                 }
 
                 List<Period> timetableList = JsonConvert.DeserializeObject<List<Period>>(html);

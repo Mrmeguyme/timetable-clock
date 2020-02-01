@@ -1,5 +1,9 @@
 # Timetable Clock
 
+##Deprecated
+This program no longer supports getting school timetable due to infrastructure changes in the school.
+A new program has been made to fix this [MYTGS](https://github.com/Torca2001/MYTGS)
+
 ## Description
 
 This is basically a clock which downloads your school timetable, and displays what period is next, and how much time until the current period ends.
